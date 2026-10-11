@@ -5,6 +5,8 @@ import { StatsManager } from './statsManager.js';
 import { AuthManager } from './authManager.js';
 import { SettingsManager } from './settingsManager.js';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'https://homework-helper-tkzv.onrender.com';
+
 document.addEventListener('DOMContentLoaded', () => {
   // --- Global Offline Handling ---
   const offlineBanner = document.getElementById('offlineBanner');
@@ -726,7 +728,7 @@ document.addEventListener('DOMContentLoaded', () => {
       analysisResult.innerHTML = `<div class="analysis-loader"><div class="spinner"></div><p>Scanning problem and thinking...</p></div>`;
 
       try {
-        const responseReq = await fetch('http://localhost:3000/api/analyze', {
+        const responseReq = await fetch(`${BACKEND_URL}/api/analyze`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ base64Data, mimeType, optionalPromptExtension })
